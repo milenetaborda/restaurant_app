@@ -1,7 +1,9 @@
-export default function Home() {
+import { Home } from "../components/templates/Home";
+
+export default function Index() {
   return (
     <main>
-      <h1>Hello</h1>
+      <Home />
     </main>
   );
 }

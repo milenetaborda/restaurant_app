@@ -1,6 +1,8 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { ThemeProvider } from "styled-components";
 import GlobalStyles from "../styles/globals";
+import { defaultTheme } from "../styles/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -11,7 +13,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <GlobalStyles />
-      <Component {...pageProps} />;
+      <ThemeProvider theme={defaultTheme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
 }
