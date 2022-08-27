@@ -16,27 +16,37 @@ const GlobalStyles = createGlobalStyle`
   body {
     max-width: 100vw;
     margin: 0 auto;
-    background-color: #E5E5E5;
+    background-color: #FFFFFF;
     
     font-family: "Poppins";
     font-style: normal;
     font-weight: 700;
+    overflow-x: hidden;
   }
 `;
 
 export default GlobalStyles;
 
+//ok
 export const H1 = styled.h1`
   font-size: 32px;
   line-height: 140%;
 `;
 
+//ok
 export const H2 = styled.h2`
-  font-size: 24px;
+  font-weight: 700;
+  font-size: 32px;
   line-height: 140%;
+
+  ${({ theme }) => theme.breakpoints.down("md")} {
+    font-size: 24px;
+  }
 `;
 
+//ok
 export const H3 = styled.h3`
+  font-weight: 700;
   font-size: 20px;
   line-height: 140%;
 `;
@@ -46,34 +56,55 @@ export const H4 = styled.h4`
   line-height: 140%;
 `;
 
+//ok
 export const H5 = styled.h5`
-  font-size: 15px;
+  font-weight: 700;
+  font-size: 18px;
   line-height: 140%;
 `;
 
+//ok
 export const H6 = styled.h6`
-  font-weight: 400;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 700;
   line-height: 140%;
+
+  ${({ theme }) => theme.breakpoints.down("md")} {
+    font-size: 15px;
+  }
 `;
 
+//ok
 export const Lead = styled.p`
   font-weight: 400;
-  font-size: 17px;
-  line-height: 26px;
+  font-size: 18px;
+  line-height: 140%;
   color: ${({ theme }) => theme.colors.darkDown};
+
+  ${({ theme }) => theme.breakpoints.down("md")} {
+    font-size: 18px;
+    line-height: 27px;
+  }
 `;
 
+//ok
 export const Paragraph = styled.p`
+  color: ${({ theme }) => theme.colors.darkDown};
+
   font-weight: 400;
   font-size: 14px;
-  line-height: 21px;
-  color: ${({ theme }) => theme.colors.darkDown};
+  line-height: 140%;
 `;
 
+//ok
 export const Small = styled.small`
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
-  color: ${({ theme }) => theme.colors.darkDown};
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: ${({ theme }) => theme.colors.white};
+
+  ${({ theme }) => theme.breakpoints.down("md")} {
+    font-size: 12px;
+    line-height: 18px;
+  }
 `;
