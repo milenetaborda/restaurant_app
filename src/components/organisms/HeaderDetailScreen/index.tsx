@@ -1,10 +1,9 @@
-import { useContext } from "react";
-import { RestaurantContext } from "~/context/RestaurantContext";
 import { Breadcrumbs } from "../../atoms/Breadcrumbs";
+import { useHeaderDetailScreen } from "./hooks";
 import * as S from "./styles";
 
 export const HeaderDetailScreen = () => {
-  const { restaurantDatail } = useContext(RestaurantContext);
+  const { phoneFormatted, restaurantDatail } = useHeaderDetailScreen();
 
   return (
     <S.HeaderDetailContainer>
@@ -16,9 +15,7 @@ export const HeaderDetailScreen = () => {
 
           <S.ContactsRestaurant>
             <S.RestaurantName>{restaurantDatail?.name}</S.RestaurantName>
-            <S.RestaurantContact>
-              {restaurantDatail?.telephone}
-            </S.RestaurantContact>
+            <S.RestaurantContact>{phoneFormatted}</S.RestaurantContact>
             <S.RestaurantContact
               as="a"
               href={restaurantDatail?.website}

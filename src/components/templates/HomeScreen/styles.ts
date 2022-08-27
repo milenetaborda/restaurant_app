@@ -16,7 +16,7 @@ export const RestaurantContainer = styled.div<{ isPositionVariant?: boolean }>`
 
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.15);
     border-radius: 32px 32px 0px 0px;
-    padding: 30px;
+    padding: 32px 30px 30px;
 
     ${({ isPositionVariant }) =>
       isPositionVariant &&
@@ -100,12 +100,13 @@ export const RestaurantsList = styled.ul`
   grid-template-columns: repeat(2, minmax(0, 350px));
 
   gap: 30px;
-  margin-top: 20px;
+  margin-top: 30px;
   margin-bottom: 20px;
   list-style-type: none;
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
     gap: 20px;
+    margin-top: 15px;
   }
 `;
 

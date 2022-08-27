@@ -25,7 +25,7 @@ export const InputSearch = ({
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      setSearch(event.target.value);
+      setSearch(event?.target?.value);
       setText("");
     }
   };

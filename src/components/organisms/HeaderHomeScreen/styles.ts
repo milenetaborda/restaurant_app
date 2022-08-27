@@ -7,8 +7,8 @@ export const HeaderContainer = styled.header<{ isHeightVariant?: boolean }>`
   padding: 30px 33px 60px;
 
   display: grid;
-  gap: 30px;
   grid-template-columns: 1fr repeat(12, minmax(0, 65px)) 1fr;
+  gap: 30px;
 
   ${({ isHeightVariant }) =>
     isHeightVariant &&
@@ -42,6 +42,10 @@ export const HeaderContent = styled.div`
   flex-direction: column;
   justify-content: space-between;
   grid-column: 2 / span 12;
+
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    grid-column: 1 / span 15;
+  }
 `;
 
 export const Section = styled.section`

@@ -4,6 +4,7 @@ import { H3, H6, Paragraph, Small } from "~/styles/globals";
 export const DetailContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr repeat(12, minmax(0, 80px)) 1fr;
+  gap: 30px;
 
   ${({ theme }) => theme.breakpoints.down("md")} {
     height: calc(100vh - 127px);
@@ -13,7 +14,7 @@ export const DetailContainer = styled.div`
 export const DetailScreenContainer = styled.div`
   max-width: 539px;
   margin: 30px;
-  grid-column: 4 / span 9;
+  grid-column: 5 / span 9;
 
   ${({ theme }) => theme.breakpoints.down("md")} {
     margin: 0;
@@ -53,6 +54,7 @@ export const Description = styled(H6)`
 `;
 
 export const Text = styled(Small)`
+  display: block;
   margin-bottom: 20px;
   color: ${({ theme }) => theme.colors.darkUp};
 `;

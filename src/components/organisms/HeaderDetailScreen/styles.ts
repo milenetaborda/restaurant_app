@@ -4,12 +4,16 @@ import { H1, Paragraph } from "~/styles/globals";
 export const HeaderDetailContainer = styled.header`
   width: 100vw;
   height: 187px;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("assets/sala-a-restaurant.png") center;
+
+  background: url("assets/sala-a-restaurant.png") no-repeat center center;
+  background-size: cover;
+  border: 1px solid #000000;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
   display: grid;
   grid-template-columns: 1fr repeat(12, minmax(0, 80px)) 1fr;
   padding: 40px 30px 28px;
+  gap: 30px;
 
   ${({ theme }) => theme.breakpoints.down("md")} {
     height: 159px;
@@ -18,12 +22,14 @@ export const HeaderDetailContainer = styled.header`
 `;
 
 export const HeaderDetailContent = styled.div`
+  max-width: 1110px;
+
   color: ${({ theme }) => theme.colors.white};
   display: flex;
   justify-content: space-between;
   align-items: start;
 
-  grid-column: 2 / span 8;
+  grid-column: 3 / span 6;
 `;
 
 export const RestaurantInformation = styled.div`

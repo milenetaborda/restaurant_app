@@ -13,10 +13,16 @@ export const InputContainer = styled.div`
     border-radius: 8px;
 
     ::placeholder {
+      font-family: "Poppins", sans-serif;
       color: ${({ theme }) => theme.colors.dark};
       font-weight: 400;
-      font-size: 14px;
-      line-height: 21px;
+      font-size: 15px;
+      line-height: 20px;
+
+      ${({ theme }) => theme.breakpoints.down("sm")} {
+        font-size: 14px;
+        line-height: 21px;
+      }
     }
 
     :focus {
