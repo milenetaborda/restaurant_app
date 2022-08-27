@@ -30,6 +30,10 @@ export const HeaderDetailContent = styled.div`
   align-items: start;
 
   grid-column: 3 / span 6;
+
+  ${({ theme }) => theme.breakpoints.down("md")} {
+    grid-column: 1 / span 12;
+  }
 `;
 
 export const RestaurantInformation = styled.div`
@@ -40,7 +44,7 @@ export const RestaurantInformation = styled.div`
     width: 119px;
     height: 119px;
     border-radius: 50%;
-    z-index: 1;
+    z-index: 999 !important;
   }
 
   ${({ theme }) => theme.breakpoints.down("md")} {

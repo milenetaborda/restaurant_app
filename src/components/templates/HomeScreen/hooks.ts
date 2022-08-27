@@ -1,8 +1,9 @@
-import axios from "axios";
 import { useRouter } from "next/router";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext } from "react";
 import { IRestaurantProp } from "~/@types/IRestaurants";
 import { RestaurantContext } from "~/context/RestaurantContext";
+import { getRestaurants } from "~/services/listRestaurantsService";
+import { showRestaurant } from "~/services/showRestaurantService";
 
 export const useHomeScreen = () => {
   const {
@@ -11,57 +12,61 @@ export const useHomeScreen = () => {
     handleBackToHome,
     restaurants,
     setRestaurants,
+    setPagination,
+    pagination,
+    hasMoreData,
+    setHasMoreData,
+    filterRestaurants,
   } = useContext(RestaurantContext);
   const router = useRouter();
 
-  const [pagination, setPagination] = useState(2);
-  const [hasMoreData, setHasMoreData] = useState<boolean>(true);
-
   const fetchRestaurantDatail = async (restaurant_id: string) => {
     try {
-      const { data: response } = await axios.get(
-        `https://605d074f9386d200171ba209.mockapi.io/api/v1/restaurants/${restaurant_id}`
-      );
+      const response = await showRestaurant({ restaurant_id });
 
-      setRestaurantDatail(response.data);
-      router.push(`/detalhes`);
+      if (typeof response !== "string") {
+        setRestaurantDatail(response.data);
+        router.push(`/detalhes`);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const filterRestaurants = restaurants?.filter((restaurant: any) => {
-    return restaurant?.name?.toLowerCase().includes(search.toLowerCase());
-  });
-
   const fetchMoreRestaurants = useCallback(() => {
+    const pageAmount = pagination + 1;
+
     (async () => {
-      const { data: response } = await axios.get(
-        `https://605d074f9386d200171ba209.mockapi.io/api/v1/restaurants?page=${pagination}&limit=10`
-      );
+      const response = await getRestaurants({ page: pageAmount });
 
-      if (response?.data?.length === 0) {
-        setHasMoreData(false);
-        return;
+      if (typeof response !== "string") {
+        if (response?.data?.length === 0) {
+          setHasMoreData(false);
+          setPagination(1);
+          return;
+        }
+
+        setRestaurants([
+          ...(restaurants as IRestaurantProp[]),
+          ...response.data,
+        ]);
+        setPagination((prev) => prev + 1);
+        setHasMoreData(true);
       }
-
-      setRestaurants([...(restaurants as IRestaurantProp[]), ...response.data]);
-      setPagination((prev) => prev + 1);
-      setHasMoreData(true);
     })();
   }, [restaurants, setRestaurants, pagination, setHasMoreData]);
-
-  const allRestaurants = filterRestaurants ? filterRestaurants : restaurants;
 
   return {
     fetchRestaurantDatail,
     isSearch: !!search,
     handleBackToHome,
-    filterRestaurants,
-    allRestaurants,
+    allRestaurants: restaurants,
     search,
     setRestaurants,
-    fetchMoreRestaurants,
+    fetchMoreRestaurants: search
+      ? () => filterRestaurants(search)
+      : fetchMoreRestaurants,
     hasMoreData,
+    filterRestaurants,
   };
 };

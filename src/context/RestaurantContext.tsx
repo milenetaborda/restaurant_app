@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useCallback, useState } from "react";
 import { IRestaurantProp } from "~/@types/IRestaurants";
+import { getRestaurants } from "~/services/listRestaurantsService";
 
 interface IRestaurantProvider {
   children: ReactNode;
@@ -17,6 +18,11 @@ interface IRestaurantContext {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   handleBackToHome: () => void;
+  setPagination: React.Dispatch<React.SetStateAction<number>>;
+  pagination: number;
+  setHasMoreData: React.Dispatch<React.SetStateAction<boolean>>;
+  hasMoreData: boolean;
+  filterRestaurants: (text: string) => void;
 }
 
 export const RestaurantContext = createContext({} as IRestaurantContext);
@@ -29,10 +35,40 @@ export function RestaurantProvider({ children }: IRestaurantProvider) {
     useState<IRestaurantProp | null>(null);
 
   const [search, setSearch] = useState("");
+  const [pagination, setPagination] = useState(1);
+  const [hasMoreData, setHasMoreData] = useState<boolean>(true);
 
   const handleBackToHome = useCallback(() => {
     setSearch("");
   }, [setSearch]);
+
+  const filterRestaurants = (search: string) => {
+    (async () => {
+      const response = await getRestaurants({
+        page: pagination,
+        search,
+      });
+
+      if (typeof response !== "string") {
+        if (response?.data?.length === 0) {
+          setHasMoreData(false);
+          setPagination(1);
+          return;
+        }
+
+        let newArray = response.data;
+
+        if (pagination > 1) {
+          newArray.push(response.data);
+          return;
+        }
+
+        setRestaurants(newArray);
+        setPagination((prev) => prev + 1);
+        setHasMoreData(true);
+      }
+    })();
+  };
 
   return (
     <RestaurantContext.Provider
@@ -44,6 +80,11 @@ export function RestaurantProvider({ children }: IRestaurantProvider) {
         handleBackToHome,
         search,
         setSearch,
+        pagination,
+        setPagination,
+        hasMoreData,
+        setHasMoreData,
+        filterRestaurants,
       }}
     >
       {children}

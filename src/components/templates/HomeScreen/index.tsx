@@ -21,6 +21,7 @@ export const HomeScreen = ({ restaurants }: IHomeScreenProps) => {
     setRestaurants,
     fetchMoreRestaurants,
     hasMoreData,
+    filterRestaurants,
   } = useHomeScreen();
 
   useEffect(() => {
@@ -57,7 +58,7 @@ export const HomeScreen = ({ restaurants }: IHomeScreenProps) => {
         loader={<Loading />}
         hasMore={hasMoreData}
         dataLength={allRestaurants?.length || 0}
-        next={fetchMoreRestaurants}
+        next={search ? () => {} : fetchMoreRestaurants}
         style={{ overflow: "none" }}
       >
         <S.RestaurantsList>

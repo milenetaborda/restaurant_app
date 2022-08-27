@@ -10,7 +10,8 @@ export interface InputSearchProps
 export const InputSearch = ({
   placeholder = "Pesquisar",
 }: InputSearchProps) => {
-  const { setSearch } = useContext(RestaurantContext);
+  const { setSearch, filterRestaurants, setPagination, pagination } =
+    useContext(RestaurantContext);
   const [text, setText] = useState("");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,15 +19,18 @@ export const InputSearch = ({
   };
 
   const handleSubmitButton = () => {
+    const searchWithoutSpaces = text.replace(/\s/g, "");
+
     setSearch(text);
     setText("");
+    setPagination(1);
+    filterRestaurants(searchWithoutSpaces);
   };
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      setSearch(event?.target?.value);
-      setText("");
+      handleSubmitButton();
     }
   };
 
