@@ -59,6 +59,7 @@ export function RestaurantProvider({ children }: IRestaurantProvider) {
         let newArray = response.data;
 
         if (pagination > 1) {
+          // @ts-ignore
           newArray.push(response.data);
           return;
         }
