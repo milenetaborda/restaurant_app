@@ -80,6 +80,10 @@ export const SearchDescriptionContainer = styled.div`
       display: block;
     }
   }
+
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    justify-content: flex-start;
+  }
 `;
 
 export const SearchDescription = styled(Paragraph)`
