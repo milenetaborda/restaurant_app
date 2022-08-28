@@ -17,13 +17,18 @@ export const useHomeScreen = ({ ssrRestaurants }: IUseHomeScreen) => {
     setRestaurants,
     hasMoreData,
     fetchMoreRestaurants,
+    setIsLoading,
+    isLoading,
+    setSearchedText,
+    setEnteredText,
   } = useContext(RestaurantContext);
   const router = useRouter();
 
   useEffect(() => {
     setRestaurants(ssrRestaurants);
+    setIsLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ssrRestaurants]);
+  }, [ssrRestaurants, setIsLoading]);
 
   const fetchRestaurantDatail = async (restaurant_id: string) => {
     try {
@@ -38,6 +43,12 @@ export const useHomeScreen = ({ ssrRestaurants }: IUseHomeScreen) => {
     }
   };
 
+  const handleSubmitInBreacrumb = () => {
+    setIsLoading(true);
+    setSearchedText("");
+    setEnteredText("");
+  };
+
   return {
     fetchRestaurantDatail,
     isTextWasSearched: !!searchedText,
@@ -47,5 +58,7 @@ export const useHomeScreen = ({ ssrRestaurants }: IUseHomeScreen) => {
     fetchMoreRestaurants,
     hasMoreData,
     restaurants,
+    isLoading,
+    handleSubmitInBreacrumb,
   };
 };

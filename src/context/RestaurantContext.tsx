@@ -21,6 +21,10 @@ interface IRestaurantContext {
   setHasMoreData: React.Dispatch<React.SetStateAction<boolean>>;
   hasMoreData: boolean;
   fetchMoreRestaurants: (text?: string) => Promise<void>;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  enteredText: string;
+  setEnteredText: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const RestaurantContext = createContext({} as IRestaurantContext);
@@ -33,13 +37,32 @@ export function RestaurantProvider({ children }: IRestaurantProvider) {
   const [searchedText, setSearchedText] = useState("");
   const [pagination, setPagination] = useState(2);
   const [hasMoreData, setHasMoreData] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [enteredText, setEnteredText] = useState("");
 
   const handleBackToHome = useCallback(() => {
+    setIsLoading(true);
+    setEnteredText("");
     setSearchedText("");
-  }, [setSearchedText]);
+
+    (async () => {
+      try {
+        const response = await getRestaurants({ page: 1 });
+
+        if (typeof response !== "string") {
+          setRestaurants(response.data);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [setSearchedText, setIsLoading, setRestaurants]);
 
   const fetchMoreRestaurants = useCallback(
     async (text?: string) => {
+      setIsLoading(!!text);
+
       const response = await getRestaurants({
         page: text ? 1 : pagination,
         search: text || searchedText,
@@ -51,9 +74,17 @@ export function RestaurantProvider({ children }: IRestaurantProvider) {
         );
         setPagination((prevPagination) => prevPagination + 1);
         setHasMoreData(response.data.length > 0);
+        setIsLoading(false);
       }
     },
-    [pagination, setRestaurants, setPagination, setHasMoreData, searchedText]
+    [
+      pagination,
+      setRestaurants,
+      setIsLoading,
+      setPagination,
+      setHasMoreData,
+      searchedText,
+    ]
   );
 
   return (
@@ -71,6 +102,10 @@ export function RestaurantProvider({ children }: IRestaurantProvider) {
         hasMoreData,
         setHasMoreData,
         fetchMoreRestaurants,
+        isLoading,
+        setIsLoading,
+        enteredText,
+        setEnteredText,
       }}
     >
       {children}

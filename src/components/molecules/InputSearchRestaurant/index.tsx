@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { InputSearch } from "~/components/atoms/InputSearch";
 import { RestaurantContext } from "~/context/RestaurantContext";
 import * as S from "./styles";
@@ -10,17 +10,21 @@ interface IInputSearchRestaurantProps {
 export const InputSearchRestaurant = ({
   isInputInHeader,
 }: IInputSearchRestaurantProps) => {
-  const { setSearchedText, setPagination, fetchMoreRestaurants } =
-    useContext(RestaurantContext);
-  const [text, setText] = useState("");
+  const {
+    setSearchedText,
+    setPagination,
+    fetchMoreRestaurants,
+    enteredText,
+    setEnteredText,
+  } = useContext(RestaurantContext);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
+    setEnteredText(e.target.value);
   };
 
   const handleSubmitButton = () => {
-    setSearchedText(text);
-    fetchMoreRestaurants(text);
+    setSearchedText(enteredText);
+    fetchMoreRestaurants(enteredText);
     setPagination(1);
   };
 
@@ -34,7 +38,7 @@ export const InputSearchRestaurant = ({
   return (
     <S.SearchContainer isInputInHeader={isInputInHeader}>
       <InputSearch
-        value={text}
+        value={enteredText}
         placeholder="Encontre um restaurante"
         handleSubmitButton={handleSubmitButton}
         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>

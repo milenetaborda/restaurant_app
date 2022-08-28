@@ -3,6 +3,7 @@ import { IRestaurantProp } from "~/@types/IRestaurants";
 import { Breadcrumbs } from "~/components/atoms/Breadcrumbs";
 import { InputSearchRestaurant } from "~/components/molecules/InputSearchRestaurant";
 import { Loading } from "~/components/molecules/Loading";
+import { LoadingCard } from "~/components/molecules/LoadingCard";
 import { useHomeScreen } from "./hooks";
 import * as S from "./styles";
 
@@ -14,12 +15,17 @@ export const HomeScreen = ({ ssrRestaurants }: IHomeScreenProps) => {
   const {
     fetchRestaurantDatail,
     isTextWasSearched,
-    handleBackToHome,
+    handleSubmitInBreacrumb,
     searchedText,
     fetchMoreRestaurants,
     hasMoreData,
     restaurants,
+    isLoading,
   } = useHomeScreen({ ssrRestaurants });
+
+  const renderLoadingCard = () => {
+    return Array.from({ length: 6 }, (_, index) => <LoadingCard key={index} />);
+  };
 
   return (
     <S.RestaurantContainer isPositionVariant={isTextWasSearched}>
@@ -30,7 +36,7 @@ export const HomeScreen = ({ ssrRestaurants }: IHomeScreenProps) => {
               text="Voltar"
               hrefUrl="/"
               themeColor="#333333"
-              onClick={handleBackToHome}
+              onClick={handleSubmitInBreacrumb}
             />
 
             <S.SearchDescription aria-label={`Resultados para ${searchedText}`}>
@@ -53,15 +59,17 @@ export const HomeScreen = ({ ssrRestaurants }: IHomeScreenProps) => {
         style={{ overflow: "none" }}
       >
         <S.RestaurantsList>
-          {restaurants?.map((restaurant: IRestaurantProp) => (
-            <S.RestaurantCard
-              key={restaurant.id}
-              onClick={() => fetchRestaurantDatail(restaurant.id)}
-              imageUrl={restaurant.image}
-            >
-              <S.RestaurantName>{restaurant?.name}</S.RestaurantName>
-            </S.RestaurantCard>
-          ))}
+          {isLoading
+            ? renderLoadingCard()
+            : restaurants?.map((restaurant: IRestaurantProp) => (
+                <S.RestaurantCard
+                  key={restaurant.id}
+                  onClick={() => fetchRestaurantDatail(restaurant.id)}
+                  imageUrl={restaurant.image}
+                >
+                  <S.RestaurantName>{restaurant?.name}</S.RestaurantName>
+                </S.RestaurantCard>
+              ))}
         </S.RestaurantsList>
       </InfiniteScroll>
     </S.RestaurantContainer>
