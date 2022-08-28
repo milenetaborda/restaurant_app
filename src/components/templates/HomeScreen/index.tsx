@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { IRestaurantProp } from "~/@types/IRestaurants";
 import { Breadcrumbs } from "~/components/atoms/Breadcrumbs";
@@ -8,29 +7,24 @@ import { useHomeScreen } from "./hooks";
 import * as S from "./styles";
 
 interface IHomeScreenProps {
-  restaurants: IRestaurantProp[];
+  ssrRestaurants: IRestaurantProp[];
 }
 
-export const HomeScreen = ({ restaurants }: IHomeScreenProps) => {
+export const HomeScreen = ({ ssrRestaurants }: IHomeScreenProps) => {
   const {
     fetchRestaurantDatail,
-    isSearch,
+    isTextWasSearched,
     handleBackToHome,
-    search,
-    allRestaurants,
-    setRestaurants,
+    searchedText,
     fetchMoreRestaurants,
     hasMoreData,
-  } = useHomeScreen();
-
-  useEffect(() => {
-    setRestaurants(restaurants);
-  }, []);
+    restaurants,
+  } = useHomeScreen({ ssrRestaurants });
 
   return (
-    <S.RestaurantContainer isPositionVariant={isSearch}>
-      <S.HomeTitleContainer isFlexVariant={isSearch}>
-        {isSearch && (
+    <S.RestaurantContainer isPositionVariant={isTextWasSearched}>
+      <S.HomeTitleContainer isFlexVariant={isTextWasSearched}>
+        {isTextWasSearched && (
           <S.SearchDescriptionContainer>
             <Breadcrumbs
               text="Voltar"
@@ -39,9 +33,9 @@ export const HomeScreen = ({ restaurants }: IHomeScreenProps) => {
               onClick={handleBackToHome}
             />
 
-            <S.SearchDescription aria-label={`Resultados para ${search}`}>
+            <S.SearchDescription aria-label={`Resultados para ${searchedText}`}>
               Resultados para
-              <S.SearchedTerm>{search}</S.SearchedTerm>
+              <S.SearchedTerm>{searchedText}</S.SearchedTerm>
             </S.SearchDescription>
           </S.SearchDescriptionContainer>
         )}
@@ -54,12 +48,12 @@ export const HomeScreen = ({ restaurants }: IHomeScreenProps) => {
       <InfiniteScroll
         loader={<Loading />}
         hasMore={hasMoreData}
-        dataLength={allRestaurants?.length || 0}
+        dataLength={restaurants?.length || 0}
         next={fetchMoreRestaurants}
         style={{ overflow: "none" }}
       >
         <S.RestaurantsList>
-          {allRestaurants?.map((restaurant: IRestaurantProp) => (
+          {restaurants?.map((restaurant: IRestaurantProp) => (
             <S.RestaurantCard
               key={restaurant.id}
               onClick={() => fetchRestaurantDatail(restaurant.id)}

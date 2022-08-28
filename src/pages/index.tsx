@@ -7,7 +7,7 @@ export default function Index({ restaurantsData }: IReadRestaurants) {
   return (
     <main>
       <HeaderHomeScreen />
-      <HomeScreen restaurants={restaurantsData ?? []} />
+      <HomeScreen ssrRestaurants={restaurantsData ?? []} />
     </main>
   );
 }

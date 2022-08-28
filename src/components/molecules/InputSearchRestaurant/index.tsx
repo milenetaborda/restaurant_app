@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { InputSearch } from "~/components/atoms/InputSearch";
 import { RestaurantContext } from "~/context/RestaurantContext";
-import { getRestaurants } from "~/services/listRestaurantsService";
 import * as S from "./styles";
 
 interface IInputSearchRestaurantProps {
@@ -11,58 +10,18 @@ interface IInputSearchRestaurantProps {
 export const InputSearchRestaurant = ({
   isInputInHeader,
 }: IInputSearchRestaurantProps) => {
-  const {
-    setSearch,
-    setRestaurants,
-    setPagination,
-    pagination,
-    setHasMoreData,
-  } = useContext(RestaurantContext);
+  const { setSearchedText, setPagination, fetchMoreRestaurants } =
+    useContext(RestaurantContext);
   const [text, setText] = useState("");
-
-  const searchRestaurantsByName = (search: string) => {
-    console.log("loading...");
-
-    (async () => {
-      const response = await getRestaurants({
-        page: 1,
-        search,
-      });
-
-      if (typeof response !== "string") {
-        if (response?.data?.length === 0) {
-          setHasMoreData(false);
-          setPagination(1);
-          return;
-        }
-
-        let newArray = response.data;
-
-        if (pagination > 1) {
-          // @ts-ignore
-          newArray.push(response.data);
-          return;
-        }
-
-        setRestaurants(newArray);
-        setPagination((prev) => prev + 1);
-        setHasMoreData(false);
-        console.log("finally loaded");
-      }
-    })();
-  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
 
   const handleSubmitButton = () => {
-    const searchWithoutSpaces = text.replace(/\s/g, "");
-
-    setSearch(text);
-    setText("");
+    setSearchedText(text);
+    fetchMoreRestaurants(text);
     setPagination(1);
-    searchRestaurantsByName(searchWithoutSpaces);
   };
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {

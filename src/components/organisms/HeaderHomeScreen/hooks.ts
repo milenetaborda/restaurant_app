@@ -2,11 +2,11 @@ import { useContext } from "react";
 import { RestaurantContext } from "~/context/RestaurantContext";
 
 export const useHeaderHomeScreen = () => {
-  const { handleBackToHome, search } = useContext(RestaurantContext);
-  const isSearch = !!search;
+  const { handleBackToHome, searchedText } = useContext(RestaurantContext);
+  const isTextWasSearched = !!searchedText;
 
   return {
     handleBackToHome,
-    isSearch,
+    isTextWasSearched,
   };
 };

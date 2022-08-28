@@ -1,23 +1,29 @@
 import { useRouter } from "next/router";
-import { useCallback, useContext } from "react";
+import { useContext, useEffect } from "react";
 import { IRestaurantProp } from "~/@types/IRestaurants";
 import { RestaurantContext } from "~/context/RestaurantContext";
-import { getRestaurants } from "~/services/listRestaurantsService";
 import { showRestaurant } from "~/services/showRestaurantService";
 
-export const useHomeScreen = () => {
+interface IUseHomeScreen {
+  ssrRestaurants: IRestaurantProp[];
+}
+
+export const useHomeScreen = ({ ssrRestaurants }: IUseHomeScreen) => {
   const {
     setRestaurantDatail,
-    search,
+    searchedText,
     handleBackToHome,
     restaurants,
     setRestaurants,
-    setPagination,
-    pagination,
     hasMoreData,
-    setHasMoreData,
+    fetchMoreRestaurants,
   } = useContext(RestaurantContext);
   const router = useRouter();
+
+  useEffect(() => {
+    setRestaurants(ssrRestaurants);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ssrRestaurants]);
 
   const fetchRestaurantDatail = async (restaurant_id: string) => {
     try {
@@ -32,37 +38,14 @@ export const useHomeScreen = () => {
     }
   };
 
-  const fetchMoreRestaurants = useCallback(() => {
-    const pageAmount = pagination + 1;
-
-    (async () => {
-      const response = await getRestaurants({ page: pageAmount });
-
-      if (typeof response !== "string") {
-        if (response?.data?.length === 0) {
-          setHasMoreData(false);
-          setPagination(1);
-          return;
-        }
-
-        setRestaurants([
-          ...(restaurants as IRestaurantProp[]),
-          ...response.data,
-        ]);
-        setPagination((prev) => prev + 1);
-        setHasMoreData(true);
-      }
-    })();
-  }, [restaurants, setRestaurants, pagination, setHasMoreData]);
-
   return {
     fetchRestaurantDatail,
-    isSearch: !!search,
+    isTextWasSearched: !!searchedText,
     handleBackToHome,
-    allRestaurants: restaurants,
-    search,
+    searchedText,
     setRestaurants,
     fetchMoreRestaurants,
     hasMoreData,
+    restaurants,
   };
 };
