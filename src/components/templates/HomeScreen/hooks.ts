@@ -16,7 +16,7 @@ export const useHomeScreen = () => {
     pagination,
     hasMoreData,
     setHasMoreData,
-    filterRestaurants,
+    searchRestaurantsByName,
   } = useContext(RestaurantContext);
   const router = useRouter();
 
@@ -64,9 +64,9 @@ export const useHomeScreen = () => {
     search,
     setRestaurants,
     fetchMoreRestaurants: search
-      ? () => filterRestaurants(search)
+      ? () => searchRestaurantsByName(search)
       : fetchMoreRestaurants,
     hasMoreData,
-    filterRestaurants,
+    searchRestaurantsByName,
   };
 };

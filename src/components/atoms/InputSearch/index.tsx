@@ -10,7 +10,7 @@ export interface InputSearchProps
 export const InputSearch = ({
   placeholder = "Pesquisar",
 }: InputSearchProps) => {
-  const { setSearch, filterRestaurants, setPagination, pagination } =
+  const { setSearch, searchRestaurantsByName, setPagination, pagination } =
     useContext(RestaurantContext);
   const [text, setText] = useState("");
 
@@ -24,7 +24,7 @@ export const InputSearch = ({
     setSearch(text);
     setText("");
     setPagination(1);
-    filterRestaurants(searchWithoutSpaces);
+    searchRestaurantsByName(searchWithoutSpaces);
   };
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {

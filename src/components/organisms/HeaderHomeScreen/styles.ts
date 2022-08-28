@@ -99,14 +99,3 @@ export const LogoImage = styled.div`
     display: none;
   }
 `;
-
-export const SearchContainer = styled.div`
-  display: block;
-  min-width: 540px;
-  max-width: 540px;
-  margin: 0 auto;
-
-  ${({ theme }) => theme.breakpoints.down("sm")} {
-    display: none;
-  }
-`;

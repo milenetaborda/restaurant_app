@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { InputSearch } from "~/components/atoms/InputSearch";
+import { InputSearchRestaurant } from "~/components/molecules/InputSearchRestaurant";
 import { useHeaderHomeScreen } from "./hooks";
 import * as S from "./styles";
 
@@ -22,9 +22,7 @@ export const HeaderHomeScreen = () => {
           </S.TextContainer>
         </S.Section>
 
-        <S.SearchContainer>
-          <InputSearch placeholder="Encontre um restaurante" />
-        </S.SearchContainer>
+        <InputSearchRestaurant isInputInHeader={true} />
       </S.HeaderContent>
     </S.HeaderContainer>
   );

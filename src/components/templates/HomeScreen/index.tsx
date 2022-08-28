@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { IRestaurantProp } from "~/@types/IRestaurants";
 import { Breadcrumbs } from "~/components/atoms/Breadcrumbs";
-import { InputSearch } from "~/components/atoms/InputSearch";
+import { InputSearchRestaurant } from "~/components/molecules/InputSearchRestaurant";
 import { Loading } from "~/components/molecules/Loading";
 import { useHomeScreen } from "./hooks";
 import * as S from "./styles";
@@ -21,7 +21,7 @@ export const HomeScreen = ({ restaurants }: IHomeScreenProps) => {
     setRestaurants,
     fetchMoreRestaurants,
     hasMoreData,
-    filterRestaurants,
+    searchRestaurantsByName,
   } = useHomeScreen();
 
   useEffect(() => {
@@ -47,9 +47,7 @@ export const HomeScreen = ({ restaurants }: IHomeScreenProps) => {
           </S.SearchDescriptionContainer>
         )}
 
-        <S.SearchContainer>
-          <InputSearch placeholder="Encontre um restaurante" />
-        </S.SearchContainer>
+        <InputSearchRestaurant isInputInHeader={false} />
 
         <S.TitleHome>Restaurantes</S.TitleHome>
       </S.HomeTitleContainer>

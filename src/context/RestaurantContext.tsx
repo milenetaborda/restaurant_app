@@ -22,7 +22,7 @@ interface IRestaurantContext {
   pagination: number;
   setHasMoreData: React.Dispatch<React.SetStateAction<boolean>>;
   hasMoreData: boolean;
-  filterRestaurants: (text: string) => void;
+  searchRestaurantsByName: (text: string) => void;
 }
 
 export const RestaurantContext = createContext({} as IRestaurantContext);
@@ -42,10 +42,10 @@ export function RestaurantProvider({ children }: IRestaurantProvider) {
     setSearch("");
   }, [setSearch]);
 
-  const filterRestaurants = (search: string) => {
+  const searchRestaurantsByName = (search: string) => {
     (async () => {
       const response = await getRestaurants({
-        page: pagination,
+        page: 1,
         search,
       });
 
@@ -85,7 +85,7 @@ export function RestaurantProvider({ children }: IRestaurantProvider) {
         setPagination,
         hasMoreData,
         setHasMoreData,
-        filterRestaurants,
+        searchRestaurantsByName,
       }}
     >
       {children}

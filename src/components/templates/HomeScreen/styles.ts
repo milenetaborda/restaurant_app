@@ -140,13 +140,3 @@ export const RestaurantName = styled(Small)`
   left: 0;
   z-index: 1;
 `;
-
-export const SearchContainer = styled.div`
-  display: none;
-
-  ${({ theme }) => theme.breakpoints.down("md")} {
-    display: block;
-    width: 100%;
-    margin-bottom: 30px;
-  }
-`;
