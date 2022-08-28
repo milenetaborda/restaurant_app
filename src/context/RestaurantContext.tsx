@@ -1,6 +1,5 @@
 import { createContext, ReactNode, useCallback, useState } from "react";
 import { IRestaurantProp } from "~/@types/IRestaurants";
-import { getRestaurants } from "~/services/listRestaurantsService";
 
 interface IRestaurantProvider {
   children: ReactNode;
@@ -22,7 +21,6 @@ interface IRestaurantContext {
   pagination: number;
   setHasMoreData: React.Dispatch<React.SetStateAction<boolean>>;
   hasMoreData: boolean;
-  searchRestaurantsByName: (text: string) => void;
 }
 
 export const RestaurantContext = createContext({} as IRestaurantContext);
@@ -42,35 +40,6 @@ export function RestaurantProvider({ children }: IRestaurantProvider) {
     setSearch("");
   }, [setSearch]);
 
-  const searchRestaurantsByName = (search: string) => {
-    (async () => {
-      const response = await getRestaurants({
-        page: 1,
-        search,
-      });
-
-      if (typeof response !== "string") {
-        if (response?.data?.length === 0) {
-          setHasMoreData(false);
-          setPagination(1);
-          return;
-        }
-
-        let newArray = response.data;
-
-        if (pagination > 1) {
-          // @ts-ignore
-          newArray.push(response.data);
-          return;
-        }
-
-        setRestaurants(newArray);
-        setPagination((prev) => prev + 1);
-        setHasMoreData(true);
-      }
-    })();
-  };
-
   return (
     <RestaurantContext.Provider
       value={{
@@ -85,7 +54,6 @@ export function RestaurantProvider({ children }: IRestaurantProvider) {
         setPagination,
         hasMoreData,
         setHasMoreData,
-        searchRestaurantsByName,
       }}
     >
       {children}
