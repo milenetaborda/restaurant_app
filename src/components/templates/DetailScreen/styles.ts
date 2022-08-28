@@ -2,9 +2,8 @@ import styled from "styled-components";
 import { H3, H6, Paragraph, Small } from "~/styles/globals";
 
 export const DetailContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr repeat(12, minmax(0, 80px)) 1fr;
-  gap: 30px;
+  display: flex;
+  justify-content: center;
 
   ${({ theme }) => theme.breakpoints.down("md")} {
     height: calc(100vh - 127px);
@@ -13,22 +12,36 @@ export const DetailContainer = styled.div`
 
 export const DetailScreenContainer = styled.div`
   max-width: 539px;
-  margin: 30px;
-  grid-column: 5 / span 9;
+  min-width: 539px;
+  padding: 30px 0 172px;
+
+  img {
+    display: none;
+  }
 
   ${({ theme }) => theme.breakpoints.down("md")} {
     margin: 0;
     min-width: -webkit-fill-available;
-    height: inherit;
+    min-height: 466px;
 
     position: absolute;
     top: 127px;
     background: ${({ theme }) => theme.colors.white};
-    grid-column: 1 / span 15;
 
-    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px -25px 16px -20px rgba(0, 0, 0, 0.15);
     border-radius: 32px 32px 0px 0px;
-    padding: 30px;
+    padding: 47px 30px 172px;
+
+    img {
+      display: block;
+      width: 119px;
+      height: 119px;
+      border-radius: 50%;
+
+      position: absolute;
+      top: -90px;
+      left: calc(50% - 119px / 2);
+    }
   }
 `;
 
@@ -45,6 +58,8 @@ export const DescriptionText = styled(Paragraph)`
   color: #676666;
 
   ${({ theme }) => theme.breakpoints.down("md")} {
+    font-size: 14px;
+    line-height: 21px;
     margin-bottom: 30px;
   }
 `;
@@ -56,6 +71,7 @@ export const Description = styled(H6)`
 export const Text = styled(Small)`
   display: block;
   margin-bottom: 20px;
+  font-weight: 400;
   color: ${({ theme }) => theme.colors.darkUp};
 `;
 
@@ -66,5 +82,26 @@ export const RestaurantName = styled(H3)`
     display: block;
     margin-bottom: 30px;
     text-align: center;
+  }
+`;
+
+export const ContactContainer = styled.div`
+  display: none;
+
+  ${({ theme }) => theme.breakpoints.down("md")} {
+    display: block;
+    margin-bottom: 30px;
+
+    small {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 21px;
+      margin: 0;
+
+      a {
+        color: ${({ theme }) => theme.colors.darkUp};
+        text-decoration: none;
+      }
+    }
   }
 `;

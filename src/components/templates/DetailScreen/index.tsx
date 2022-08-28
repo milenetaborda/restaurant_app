@@ -8,10 +8,23 @@ export const DetailScreen = () => {
   return (
     <S.DetailContainer>
       <S.DetailScreenContainer>
+        <img src={restaurantDatail?.image} alt="Logo do restaurante" />
+
         <S.RestaurantName>{restaurantDatail?.name}</S.RestaurantName>
 
         <S.Description>Descrição</S.Description>
         <S.DescriptionText>{restaurantDatail?.description}</S.DescriptionText>
+
+        <S.ContactContainer>
+          <S.Description>Contato</S.Description>
+          <S.Text>{restaurantDatail?.telephone}</S.Text>
+
+          <S.Text>
+            <a href={restaurantDatail?.website} target="_blank">
+              {restaurantDatail?.website}
+            </a>
+          </S.Text>
+        </S.ContactContainer>
 
         <S.Description>Faixa de preço</S.Description>
         <S.Text>{restaurantDatail?.price_range}</S.Text>

@@ -10,10 +10,10 @@ export const HeaderDetailContainer = styled.header`
   border: 1px solid #000000;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
-  display: grid;
-  grid-template-columns: 1fr repeat(12, minmax(0, 80px)) 1fr;
+  margin: 0 auto;
+  display: flex;
   padding: 40px 30px 28px;
-  gap: 30px;
+  justify-content: center;
 
   ${({ theme }) => theme.breakpoints.down("md")} {
     height: 159px;
@@ -22,18 +22,17 @@ export const HeaderDetailContainer = styled.header`
 `;
 
 export const HeaderDetailContent = styled.div`
+  width: 1110px;
   max-width: 1110px;
+  padding-left: 17px;
+
+  button {
+    margin-right: 218px;
+  }
 
   color: ${({ theme }) => theme.colors.white};
   display: flex;
-  justify-content: space-between;
   align-items: start;
-
-  grid-column: 3 / span 6;
-
-  ${({ theme }) => theme.breakpoints.down("md")} {
-    grid-column: 1 / span 12;
-  }
 `;
 
 export const RestaurantInformation = styled.div`
@@ -44,14 +43,10 @@ export const RestaurantInformation = styled.div`
     width: 119px;
     height: 119px;
     border-radius: 50%;
-    z-index: 999 !important;
   }
 
   ${({ theme }) => theme.breakpoints.down("md")} {
-    position: absolute;
-
-    top: 40px;
-    left: calc(50% - 119px / 2);
+    display: none;
   }
 `;
 
