@@ -114,18 +114,13 @@ export const RestaurantsList = styled.ul`
   }
 `;
 
-export const RestaurantCard = styled.li`
+export const RestaurantCard = styled.li<{ imageUrl: string }>`
   height: 170px;
   border-radius: 8px;
   position: relative;
   cursor: pointer;
-
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-  }
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(${({ imageUrl }) => imageUrl}) no-repeat center center / cover;
 
   ${({ theme }) => theme.breakpoints.down("md")} {
     height: 160px;

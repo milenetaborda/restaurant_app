@@ -21,7 +21,6 @@ export const HomeScreen = ({ restaurants }: IHomeScreenProps) => {
     setRestaurants,
     fetchMoreRestaurants,
     hasMoreData,
-    searchRestaurantsByName,
   } = useHomeScreen();
 
   useEffect(() => {
@@ -56,7 +55,7 @@ export const HomeScreen = ({ restaurants }: IHomeScreenProps) => {
         loader={<Loading />}
         hasMore={hasMoreData}
         dataLength={allRestaurants?.length || 0}
-        next={search ? () => {} : fetchMoreRestaurants}
+        next={fetchMoreRestaurants}
         style={{ overflow: "none" }}
       >
         <S.RestaurantsList>
@@ -64,8 +63,8 @@ export const HomeScreen = ({ restaurants }: IHomeScreenProps) => {
             <S.RestaurantCard
               key={restaurant.id}
               onClick={() => fetchRestaurantDatail(restaurant.id)}
+              imageUrl={restaurant.image}
             >
-              <img src={restaurant.image} alt={restaurant?.name} />
               <S.RestaurantName>{restaurant?.name}</S.RestaurantName>
             </S.RestaurantCard>
           ))}
