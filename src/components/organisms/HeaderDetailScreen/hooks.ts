@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { RestaurantContext } from "~/context/RestaurantContext";
 
 export const useHeaderDetailScreen = () => {
-  const { restaurantDatail } = useContext(RestaurantContext);
+  const { restaurantDatail, handleBackToHome } = useContext(RestaurantContext);
 
   const phoneFormatted = restaurantDatail?.telephone
     .replace(/\D+/g, "")
@@ -11,5 +11,6 @@ export const useHeaderDetailScreen = () => {
   return {
     restaurantDatail,
     phoneFormatted,
+    handleBackToHome,
   };
 };

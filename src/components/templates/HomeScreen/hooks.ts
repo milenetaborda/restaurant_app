@@ -19,8 +19,6 @@ export const useHomeScreen = ({ ssrRestaurants }: IUseHomeScreen) => {
     fetchMoreRestaurants,
     setIsLoading,
     isLoading,
-    setSearchedText,
-    setEnteredText,
   } = useContext(RestaurantContext);
   const router = useRouter();
 
@@ -47,12 +45,6 @@ export const useHomeScreen = ({ ssrRestaurants }: IUseHomeScreen) => {
     }
   };
 
-  const handleSubmitInBreacrumb = () => {
-    setIsLoading(true);
-    setSearchedText("");
-    setEnteredText("");
-  };
-
   return {
     fetchRestaurantDatail,
     isTextWasSearched: !!searchedText,
@@ -63,6 +55,5 @@ export const useHomeScreen = ({ ssrRestaurants }: IUseHomeScreen) => {
     hasMoreData,
     restaurants,
     isLoading,
-    handleSubmitInBreacrumb,
   };
 };

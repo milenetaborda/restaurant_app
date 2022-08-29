@@ -41,31 +41,21 @@ export function RestaurantProvider({ children }: IRestaurantProvider) {
   const [enteredText, setEnteredText] = useState("");
 
   const handleBackToHome = useCallback(() => {
-    setIsLoading(true);
+    setRestaurants([]);
     setEnteredText("");
     setSearchedText("");
 
-    (async () => {
-      try {
-        const response = await getRestaurants({ page: 1 });
-
-        if (typeof response !== "string") {
-          setRestaurants(response.data);
-          setIsLoading(false);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, [setSearchedText, setIsLoading, setRestaurants]);
+    setPagination(1);
+    fetchMoreRestaurants("", true);
+  }, [setSearchedText, setEnteredText, setPagination]);
 
   const fetchMoreRestaurants = useCallback(
-    async (text?: string) => {
-      setIsLoading(!!text);
+    async (text?: string, backHome?: boolean) => {
+      setIsLoading(!!text || !!backHome);
 
       const response = await getRestaurants({
-        page: text ? 1 : pagination,
-        search: text || searchedText,
+        page: text || backHome ? 1 : pagination,
+        ...(!backHome && { search: text || searchedText }),
       });
 
       if (typeof response !== "string") {

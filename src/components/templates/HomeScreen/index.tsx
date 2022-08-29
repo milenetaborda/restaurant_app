@@ -15,7 +15,7 @@ export const HomeScreen = ({ ssrRestaurants }: IHomeScreenProps) => {
   const {
     fetchRestaurantDatail,
     isTextWasSearched,
-    handleSubmitInBreacrumb,
+    handleBackToHome,
     searchedText,
     fetchMoreRestaurants,
     hasMoreData,
@@ -36,7 +36,7 @@ export const HomeScreen = ({ ssrRestaurants }: IHomeScreenProps) => {
               text="Voltar"
               hrefUrl="/"
               themeColor="#333333"
-              onClick={handleSubmitInBreacrumb}
+              onClick={handleBackToHome}
             />
 
             <S.SearchDescription aria-label={`Resultados para ${searchedText}`}>

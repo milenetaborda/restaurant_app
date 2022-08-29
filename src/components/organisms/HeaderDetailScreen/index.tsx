@@ -3,12 +3,13 @@ import { useHeaderDetailScreen } from "./hooks";
 import * as S from "./styles";
 
 export const HeaderDetailScreen = () => {
-  const { phoneFormatted, restaurantDatail } = useHeaderDetailScreen();
+  const { phoneFormatted, restaurantDatail, handleBackToHome } =
+    useHeaderDetailScreen();
 
   return (
     <S.HeaderDetailContainer>
       <S.HeaderDetailContent>
-        <Breadcrumbs text="Voltar" hrefUrl="/" />
+        <Breadcrumbs text="Voltar" hrefUrl="/" onClick={handleBackToHome} />
 
         <S.RestaurantInformation>
           <img src={restaurantDatail?.logo} alt="Logo do restaurante" />
