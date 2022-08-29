@@ -1,8 +1,6 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { Fragment, useEffect } from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { ThemeProvider } from "styled-components";
 import { RestaurantProvider } from "~/context/RestaurantContext";
 import GlobalStyles from "../styles/globals";
@@ -16,14 +14,13 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <Fragment>
       <Head>
-        <title>Get In</title>
-        <meta name="description" content="Restaurante Get In" />
+        <title>Restaurant app</title>
+        <meta name="description" content="Restaurant app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <GlobalStyles />
       <ThemeProvider theme={defaultTheme}>
         <RestaurantProvider>
-          <ToastContainer />
           <Component {...pageProps} />
         </RestaurantProvider>
       </ThemeProvider>
