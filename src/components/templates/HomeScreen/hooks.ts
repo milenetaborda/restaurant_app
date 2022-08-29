@@ -36,6 +36,10 @@ export const useHomeScreen = ({ ssrRestaurants }: IUseHomeScreen) => {
 
       if (typeof response !== "string") {
         setRestaurantDatail(response.data);
+        sessionStorage.setItem(
+          "restaurantDatail",
+          JSON.stringify(response.data)
+        );
         router.push(`/detalhes`);
       }
     } catch (error) {

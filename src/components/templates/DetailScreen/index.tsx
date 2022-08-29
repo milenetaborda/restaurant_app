@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { RestaurantContext } from "~/context/RestaurantContext";
+import { useDetailScreen } from "./hooks";
 import * as S from "./styles";
 
 export const DetailScreen = () => {
-  const { restaurantDatail } = useContext(RestaurantContext);
+  const { restaurantDatail } = useDetailScreen();
 
   return (
     <S.DetailContainer>
