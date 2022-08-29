@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { H5, Paragraph, Small } from "../../../styles/globals";
+import { H2, H5, Paragraph, Small } from "../../../styles/globals";
 
 export const RestaurantContainer = styled.div<{ isPositionVariant?: boolean }>`
   max-width: 730px;
@@ -47,13 +47,7 @@ export const HomeTitleContainer = styled.div<{ isFlexVariant?: boolean }>`
   }
 `;
 
-export const TitleHome = styled(H5)`
-  font-size: 24px;
-
-  ${({ theme }) => theme.breakpoints.down("md")} {
-    font-size: 15px;
-  }
-`;
+export const TitleHome = styled(H2)``;
 
 export const SearchDescriptionContainer = styled.div`
   text-align: right;

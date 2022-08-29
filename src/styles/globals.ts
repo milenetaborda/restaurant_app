@@ -34,11 +34,11 @@ export const H1 = styled.h1`
 
 export const H2 = styled.h2`
   font-weight: 700;
-  font-size: 32px;
+  font-size: 24px;
   line-height: 140%;
 
   ${({ theme }) => theme.breakpoints.down("md")} {
-    font-size: 24px;
+    font-size: 15px;
   }
 `;
 

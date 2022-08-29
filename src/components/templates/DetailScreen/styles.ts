@@ -53,12 +53,12 @@ export const EmptyDiv = styled.hr`
 
 export const DescriptionText = styled(Paragraph)`
   margin-bottom: 20px;
-  font-size: 22px;
+  font-size: 22px !important;
   line-height: 33px;
   color: #676666;
 
   ${({ theme }) => theme.breakpoints.down("md")} {
-    font-size: 14px;
+    font-size: 14px !important;
     line-height: 21px;
     margin-bottom: 30px;
   }
@@ -72,7 +72,7 @@ export const Text = styled(Small)`
   display: block;
   margin-bottom: 20px;
   font-weight: 400;
-  color: ${({ theme }) => theme.colors.darkUp};
+  color: ${({ theme }) => theme.colors.darkUp} !important;
 `;
 
 export const RestaurantName = styled(H3)`
