@@ -9,6 +9,14 @@
 
   Esse projeto tem como desafio uma tela com listagem dos restaurantes, um campo de busca que filtra os restaurantes,  e uma tela com os detalhes para cada produto.
 
+## Estrutura do Projeto
+
+A estrutura do projeto é baseada principalmente atomic design, então todos os componentes devem ser criados da seguinte forma:
+
+- **atoms**: menores componentes, como `Button`, `Text`, `Icon`.
+- **molecule**: componentes pequenos incluindo um ou vários `atoms`, como `Card`, `Input`, `List`.
+- **organism**: componentes maiores incluindo um ou vários `molecules`, como `Form`, `Table`, `Modal`.
+- **template**: componentes maiores incluindo um ou vários vários `organisms`, como `Page`, `Layout`, `App`. Esse componente é responsável por toda a estrutura daquela do conteudo daquela página.
 
 ## Tecnologias
 
