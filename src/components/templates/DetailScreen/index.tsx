@@ -2,7 +2,7 @@ import { useDetailScreen } from "./hooks";
 import * as S from "./styles";
 
 export const DetailScreen = () => {
-  const { restaurantDatail } = useDetailScreen();
+  const { restaurantDatail, phoneFormatted } = useDetailScreen();
 
   return (
     <S.DetailContainer>
@@ -16,7 +16,7 @@ export const DetailScreen = () => {
 
         <S.ContactContainer>
           <S.Description>Contato</S.Description>
-          <S.Text>{restaurantDatail?.telephone}</S.Text>
+          <S.Text>{phoneFormatted}</S.Text>
 
           <S.Text>
             <a
