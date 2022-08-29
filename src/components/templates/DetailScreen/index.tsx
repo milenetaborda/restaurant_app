@@ -19,7 +19,11 @@ export const DetailScreen = () => {
           <S.Text>{restaurantDatail?.telephone}</S.Text>
 
           <S.Text>
-            <a href={restaurantDatail?.website} target="_blank">
+            <a
+              href={restaurantDatail?.website}
+              target="_blank"
+              rel="noreferrer"
+            >
               {restaurantDatail?.website}
             </a>
           </S.Text>

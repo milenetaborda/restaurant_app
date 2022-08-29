@@ -21,6 +21,7 @@ export const HeaderDetailScreen = () => {
               as="a"
               href={restaurantDatail?.website}
               target="_blank"
+              rel="noreferrer"
             >
               {restaurantDatail?.website}
             </S.RestaurantContact>

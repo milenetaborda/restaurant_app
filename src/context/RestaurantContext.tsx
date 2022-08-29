@@ -47,6 +47,7 @@ export function RestaurantProvider({ children }: IRestaurantProvider) {
 
     setPagination(1);
     fetchMoreRestaurants("", true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setSearchedText, setEnteredText, setPagination]);
 
   const fetchMoreRestaurants = useCallback(
