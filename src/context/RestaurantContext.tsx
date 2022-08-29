@@ -41,7 +41,6 @@ export function RestaurantProvider({ children }: IRestaurantProvider) {
   const [enteredText, setEnteredText] = useState("");
 
   const handleBackToHome = useCallback(() => {
-    setRestaurants([]);
     setEnteredText("");
     setSearchedText("");
 
@@ -61,7 +60,9 @@ export function RestaurantProvider({ children }: IRestaurantProvider) {
 
       if (typeof response !== "string") {
         setRestaurants((prevRestaurants) =>
-          text ? response.data : [...prevRestaurants, ...response.data]
+          text || backHome
+            ? response.data
+            : [...prevRestaurants, ...response.data]
         );
         setPagination((prevPagination) => prevPagination + 1);
         setHasMoreData(response.data.length > 0);
