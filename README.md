@@ -17,6 +17,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Next](https://nextjs.org/)
 - [Typescript](https://www.typescriptlang.org/docs/)
 - [Styled-components](https://styled-components.com/)
+- [Axios](https://axios-http.com/)
 
 
 ##  Layout
