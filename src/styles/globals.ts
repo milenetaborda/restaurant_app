@@ -27,13 +27,11 @@ const GlobalStyles = createGlobalStyle`
 
 export default GlobalStyles;
 
-//ok
 export const H1 = styled.h1`
   font-size: 32px;
   line-height: 140%;
 `;
 
-//ok
 export const H2 = styled.h2`
   font-weight: 700;
   font-size: 32px;
@@ -44,7 +42,6 @@ export const H2 = styled.h2`
   }
 `;
 
-//ok
 export const H3 = styled.h3`
   font-weight: 700;
   font-size: 20px;
@@ -56,14 +53,12 @@ export const H4 = styled.h4`
   line-height: 140%;
 `;
 
-//ok
 export const H5 = styled.h5`
   font-weight: 700;
   font-size: 18px;
   line-height: 140%;
 `;
 
-//ok
 export const H6 = styled.h6`
   font-size: 14px;
   font-weight: 700;
@@ -74,7 +69,6 @@ export const H6 = styled.h6`
   }
 `;
 
-//ok
 export const Lead = styled.p`
   font-weight: 400;
   font-size: 18px;
@@ -87,7 +81,6 @@ export const Lead = styled.p`
   }
 `;
 
-//ok
 export const Paragraph = styled.p`
   color: ${({ theme }) => theme.colors.darkDown};
 
@@ -96,7 +89,6 @@ export const Paragraph = styled.p`
   line-height: 140%;
 `;
 
-//ok
 export const Small = styled.small`
   font-weight: 700;
   font-size: 16px;

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { H2, Lead } from "~/styles/globals";
+import { H1, Lead } from "~/styles/globals";
 
 export const HeaderContainer = styled.header<{ isHeightVariant?: boolean }>`
   height: ${({ isHeightVariant }) => (isHeightVariant ? "265px" : "375px")};
@@ -75,9 +75,10 @@ export const TextContainer = styled.div<{ isVisibilityHidden?: boolean }>`
   }
 `;
 
-export const HeaderTitle = styled(H2)`
+export const HeaderTitle = styled(H1)`
   ${({ theme }) => theme.breakpoints.down("sm")} {
     max-width: 230px;
+    font-size: 24px;
   }
 `;
 
