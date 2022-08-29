@@ -24,7 +24,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 Foi utilizado a ferramenta Figma para o criação das páginas no layout web e no layout mobile.
 
 ##  Iniciando o projeto
-- Clone este repositório usando `[git clone https://github.com/ContratacaoDev/MileneTaborda-15082022.git](https://github.com/milenetaborda/restaurant_app.git)`
+- Clone este repositório usando `[https://github.com/milenetaborda/restaurant_app.git]`
 - Vá para o diretório usando: `cd restaurant_app`;
 - Rode o comando `yarn` para instalar todas as dependências;
 - Rode o comando `yarn dev` para iniciar o servidor;
