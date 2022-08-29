@@ -10,6 +10,7 @@ export const RestaurantContainer = styled.div<{ isPositionVariant?: boolean }>`
 
   ${({ theme }) => theme.breakpoints.down("md")} {
     max-width: fit-content;
+    min-width: -webkit-fill-available;
     position: absolute;
     top: 215px;
     background: #fff;
@@ -134,4 +135,19 @@ export const RestaurantName = styled(Small)`
   bottom: 0;
   left: 0;
   z-index: 1;
+`;
+
+export const EmptyRestaurantContent = styled.div`
+  padding-top: 79px;
+  font-family: "Popins", sans-serif;
+
+  h3 {
+    font-size: 20px;
+    font-weight: normal;
+  }
+
+  p {
+    font-size: 16px;
+    margin-top: 31px;
+  }
 `;

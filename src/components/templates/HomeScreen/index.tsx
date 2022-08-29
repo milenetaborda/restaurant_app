@@ -58,19 +58,26 @@ export const HomeScreen = ({ ssrRestaurants }: IHomeScreenProps) => {
         next={fetchMoreRestaurants}
         style={{ overflow: "none" }}
       >
-        <S.RestaurantsList>
-          {isLoading
-            ? renderLoadingCard()
-            : restaurants?.map((restaurant: IRestaurantProp) => (
-                <S.RestaurantCard
-                  key={restaurant.id}
-                  onClick={() => fetchRestaurantDatail(restaurant.id)}
-                  imageUrl={restaurant.image}
-                >
-                  <S.RestaurantName>{restaurant?.name}</S.RestaurantName>
-                </S.RestaurantCard>
-              ))}
-        </S.RestaurantsList>
+        {restaurants.length === 0 ? (
+          <S.EmptyRestaurantContent>
+            <h3>Ops!</h3>
+            <p>Não encontramos nenhum restaurante</p>
+          </S.EmptyRestaurantContent>
+        ) : (
+          <S.RestaurantsList>
+            {isLoading
+              ? renderLoadingCard()
+              : restaurants?.map((restaurant: IRestaurantProp) => (
+                  <S.RestaurantCard
+                    key={restaurant.id}
+                    onClick={() => fetchRestaurantDatail(restaurant.id)}
+                    imageUrl={restaurant.image}
+                  >
+                    <S.RestaurantName>{restaurant?.name}</S.RestaurantName>
+                  </S.RestaurantCard>
+                ))}
+          </S.RestaurantsList>
+        )}
       </InfiniteScroll>
     </S.RestaurantContainer>
   );
