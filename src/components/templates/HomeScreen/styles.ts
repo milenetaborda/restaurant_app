@@ -90,6 +90,10 @@ export const SearchDescription = styled(Paragraph)`
   ${({ theme }) => theme.breakpoints.down("md")} {
     margin-left: 54px;
   }
+
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    text-align: center;
+  }
 `;
 
 export const SearchedTerm = styled(H5)``;
