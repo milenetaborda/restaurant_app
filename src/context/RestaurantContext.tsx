@@ -55,7 +55,7 @@ export function RestaurantProvider({ children }: IRestaurantProvider) {
 
       const response = await getRestaurants({
         page: text || backHome ? 1 : pagination,
-        ...(!backHome && { search: text || searchedText }),
+        search: text || searchedText,
       });
 
       if (typeof response !== "string") {
