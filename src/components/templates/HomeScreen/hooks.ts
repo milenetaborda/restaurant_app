@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IRestaurantProp } from "~/@types/IRestaurants";
 import { RestaurantContext } from "~/context/RestaurantContext";
 import { showRestaurant } from "~/services/showRestaurantService";
@@ -22,11 +22,16 @@ export const useHomeScreen = ({ ssrRestaurants }: IUseHomeScreen) => {
   } = useContext(RestaurantContext);
   const router = useRouter();
 
+  const [isSendingData, setIsSendingData] = useState(true);
+
   useEffect(() => {
-    setRestaurants(ssrRestaurants);
-    setIsLoading(false);
+    if (ssrRestaurants.length) {
+      setRestaurants(ssrRestaurants);
+      setIsLoading(false);
+      setIsSendingData(false);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ssrRestaurants, setIsLoading]);
+  }, [ssrRestaurants, setIsLoading, setIsSendingData]);
 
   const fetchRestaurantDatail = async (restaurant_id: string) => {
     try {
@@ -45,6 +50,8 @@ export const useHomeScreen = ({ ssrRestaurants }: IUseHomeScreen) => {
     }
   };
 
+  const isEmptyRestaurants = restaurants?.length === 0 && !isSendingData;
+
   return {
     fetchRestaurantDatail,
     isTextWasSearched: !!searchedText,
@@ -55,5 +62,6 @@ export const useHomeScreen = ({ ssrRestaurants }: IUseHomeScreen) => {
     hasMoreData,
     restaurants,
     isLoading,
+    isEmptyRestaurants,
   };
 };

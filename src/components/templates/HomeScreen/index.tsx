@@ -21,6 +21,7 @@ export const HomeScreen = ({ ssrRestaurants }: IHomeScreenProps) => {
     hasMoreData,
     restaurants,
     isLoading,
+    isEmptyRestaurants,
   } = useHomeScreen({ ssrRestaurants });
 
   const renderLoadingCard = () => {
@@ -58,7 +59,7 @@ export const HomeScreen = ({ ssrRestaurants }: IHomeScreenProps) => {
         next={fetchMoreRestaurants}
         style={{ overflow: "none" }}
       >
-        {restaurants?.length === 0 ? (
+        {isEmptyRestaurants ? (
           <S.EmptyRestaurantContent>
             <h3>Ops!</h3>
             <p>Não encontramos nenhum restaurante</p>
