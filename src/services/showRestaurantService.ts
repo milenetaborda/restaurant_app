@@ -2,7 +2,7 @@ import { IRestaurantProp } from "~/@types/IRestaurants";
 import { api } from "./api";
 
 interface IParams {
-  restaurant_id?: string;
+  restaurant_id: string;
 }
 
 interface IShowRestaurantService {

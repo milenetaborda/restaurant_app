@@ -58,7 +58,7 @@ export const HomeScreen = ({ ssrRestaurants }: IHomeScreenProps) => {
         next={fetchMoreRestaurants}
         style={{ overflow: "none" }}
       >
-        {restaurants.length === 0 ? (
+        {restaurants?.length === 0 ? (
           <S.EmptyRestaurantContent>
             <h3>Ops!</h3>
             <p>Não encontramos nenhum restaurante</p>

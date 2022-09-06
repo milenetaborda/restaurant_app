@@ -1,6 +1,6 @@
-import axios from "axios";
 import { IReadRestaurants } from "~/@types/IRestaurants";
 import { HeaderHomeScreen } from "~/components/organisms/HeaderHomeScreen";
+import { api } from "~/services/api";
 import { HomeScreen } from "../components/templates/HomeScreen";
 
 export default function Index({ restaurantsData }: IReadRestaurants) {
@@ -13,9 +13,7 @@ export default function Index({ restaurantsData }: IReadRestaurants) {
 }
 
 export const getServerSideProps = async () => {
-  const { data: response } = await axios.get(
-    "https://605d074f9386d200171ba209.mockapi.io/api/v1/restaurants?page=1&limit=10"
-  );
+  const { data: response } = await api.get("/restaurants?page=1&limit=10");
 
   return {
     props: {
