@@ -6,6 +6,7 @@ import Document, {
   NextScript,
 } from "next/document";
 import { ServerStyleSheet } from "styled-components";
+import { CONSTANTS_ENV } from "~/constants";
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -47,6 +48,20 @@ export default class MyDocument extends Document {
           <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;600&display=swap"
             rel="stylesheet"
+          />
+
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.smartlook||(function(d) {
+                var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+                var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+                c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+                })(document);
+                smartlook('init', '${CONSTANTS_ENV.SMART_LOOK}');
+                console.log('smartlook initialized')
+              `,
+            }}
           />
         </Head>
         <body>
